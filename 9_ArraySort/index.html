@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Email List</title>
+</head>
+
+<body class="p-4">
+
+    <div class="container">
+        <h1 class="text-center mb-4">Liste des Emails</h1>
+
+        <div class="text-center mb-3">
+            <button class="btn btn-primary" onclick="sortEmail()">Trier A → Z</button>
+        </div>
+
+        <table class="table table-bordered table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody id="emailTableBody">
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        let emails = [
+            "bob@example.com",
+            "henry@icloud.com",
+            "charlie@outlook.fr",
+            "alice@example.com",
+            "jules@example.com",
+            "eve@gmail.com",
+            "frank@example.com",
+            "grace@yopmail.com",
+            "hannah@example.com",
+            "ian@example.com",
+            "diana@example.com",
+            "zephyr@gmail.com",
+            "yves@icloud.com"
+        ];
+
+        let emailTableBody = document.getElementById("emailTableBody");
+
+        function displayEmails(emailArray){
+            emailTableBody.innerHTML = ""; 
+
+            emailArray.forEach(email => {
+                let row = document.createElement("tr");
+                let cell = document.createElement("td");
+                cell.textContent = email;
+                row.appendChild(cell);
+                emailTableBody.appendChild(row);
+            });
+        }
+
+        function sortEmail() {
+            emails.sort();
+            displayEmails(emails);
+        }
+
+        // Affichage initial
+        displayEmails(emails);
+    </script>
+
+</body>
+</html>
