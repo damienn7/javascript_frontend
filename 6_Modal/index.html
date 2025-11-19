@@ -6,6 +6,66 @@
     <title>Product Gallery</title>
 </head>
 <body>
+    <style>
+        #productsSection {
+            display: flex;
+            /* gap: 1rem; */
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        #productsSection div img {
+            width: 300px;
+        }
+
+        #productModal {
+            display: none;
+            position: fixed;
+            z-index: 2;
+            left: 25vw;
+            top: 25vh;
+            width: 50vw;
+            height: 50vh;
+            border-radius: 1rem;
+            background-color: azure;
+        }
+
+        #modalOverlay {
+            position: fixed;
+            top: 0rem;
+            left: 0rem;
+            display: none;
+            z-index: 1;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(0,0,0, 0.1);
+        }
+
+        #productModalClose {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            border: none;
+            border-radius: 0.5px;
+            padding: 3px 7px;
+            background-color: #EDEDED;
+        }
+    </style>
+
+    <div id="productsSection">
+
+    </div>
+
+    <div id="productModal">
+        <button id="productModalClose">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+        </button>
+    </div>
+
+    <div id="modalOverlay">
+
+    </div>
+
     <script>
         const productsObjectArray = [
             { id:1, name: "Tablette fire", image_url: "https://cdn.leonardo.ai/users/2cbfd30f-6e5b-419d-94c0-00853dd21810/generations/743fd24f-d1b7-43da-b9ad-dd3ad6d4fd32/segments/4:4:1/Flux_Schnell_a_sleek_and_modern_electronic_tablet_with_a_metal_3.jpg", details: "Tablette résistante au haute température.", price: 79.99 },
@@ -14,47 +74,51 @@
             { id:4, name: "Tablette wind", image_url: "https://cdn.leonardo.ai/users/2cbfd30f-6e5b-419d-94c0-00853dd21810/generations/743fd24f-d1b7-43da-b9ad-dd3ad6d4fd32/segments/1:4:1/Flux_Schnell_a_sleek_and_modern_electronic_tablet_with_a_metal_0.jpg", details: "Tablette ultra légère.", price: 45.00 }
         ];
 
-        const productsSection = ...;
-        const productModal = ...;
-        const modalOverlay = ...;
-        const productModalClose = ...;
+        const productsSection = document.getElementById("productsSection");
+        const productModal = document.getElementById("productModal");
+        const modalOverlay = document.getElementById("modalOverlay");
+        const productModalClose = document.getElementById("productModalClose");
 
         function displayProducts(){
             productsObjectArray.forEach((product, index) => {
                 // https://developer.mozilla.org/fr/docs/Web/API/Document/createElement
-                const productDiv = ...;
+                const productDiv = document.createElement("div");
+                
                 // https://developer.mozilla.org/fr/docs/Web/API/HTMLElement/dataset
-                ...;
+                productDiv.dataset.product = JSON.stringify(product);
 
-                const productImage = ...;
-                ...;
+                const productImage = document.createElement("img");
+                productImage.src = product.image_url;
 
-                const productNamePrice = ...;
-                ...;
+                const productNamePrice = document.createElement("p");
+                productNamePrice.textContent = product.price;
 
                 // https://developer.mozilla.org/fr/docs/Web/API/Node/appendChild
-                ...;
-                ...;
+                productDiv.append(productImage);
+                productDiv.append(productNamePrice);
 
                 productDiv.addEventListener("click", () => showModal(index));
 
-                ...;
+                productsSection.append(productDiv);
             });
         }
 
         function showModal(index) {
-            ...;
-            ...;
-            ...;
-            ...;
+            productModal.style.display = "flex";
+            modalOverlay.style.display = "flex";
+            const productImage = document.createElement("img");
+            productImage.src = productsObjectArray[index].image_url;
 
-            ...;
-            ...;
+            const productNamePrice = document.createElement("p");
+            productNamePrice.textContent = productsObjectArray[index].price;
+
+            productModal.append(productImage);
+            productModal.append(productNamePrice);
         }
 
         function closeModal() {
-            ...;
-            ...;
+            productModal.style.display = "none";
+            modalOverlay.style.display = "none";
         }
 
         productModalClose.addEventListener("click", closeModal);
