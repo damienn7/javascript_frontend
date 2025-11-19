@@ -7,8 +7,19 @@
 </head>
 
 <body>
+    <style>
+        #banner {
+            height: 100vh;
+            width: 100vw;
+            background: no-repeat url("https://cdn.leonardo.ai/users/2cbfd30f-6e5b-419d-94c0-00853dd21810/generations/58c67e1b-e085-4b89-8cdb-89226b4f0147/segments/4:4:1/Flux_Schnell_a_serene_and_expansive_landscape_with_rolling_hil_3.jpg");
+            transition: all 0.2s ease;
+        }
+    </style>
+    <div id="banner">
+
+    </div>
     <script>
-        let banner = ...;
+        let banner = document.getElementById('banner');
 
         let imagesArray = [
             "https://cdn.leonardo.ai/users/2cbfd30f-6e5b-419d-94c0-00853dd21810/generations/58c67e1b-e085-4b89-8cdb-89226b4f0147/segments/4:4:1/Flux_Schnell_a_serene_and_expansive_landscape_with_rolling_hil_3.jpg",
@@ -20,11 +31,7 @@
         let count = 0;
 
         function displayNextImage() {
-            ...;
-            ...;
-            ...;
-
-            ...;
+            banner.style.background = `no-repeat url("${imagesArray[count]}")`;
 
             count++;
             if (count >= imagesArray.length) count = 0;
